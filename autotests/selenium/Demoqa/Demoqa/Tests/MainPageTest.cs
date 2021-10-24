@@ -1,7 +1,6 @@
+using Demoqa.Extensions;
 using Demoqa.PageObjects;
 using NUnit.Framework;
-using OpenQA.Selenium.Support.UI;
-using System;
 
 namespace Demoqa.Tests
 {
@@ -14,18 +13,15 @@ namespace Demoqa.Tests
         [TestCase(Card.WIDGETS, "widgets")]
         [TestCase(Card.INTERACTIONS, "interaction")]
         [TestCase(Card.BOOK_STORE_APPLICATION, "books")]
-        public void Test_ClickByCardShouldOpenRequiredPage(Card card, string cardPath)
+        public void Test_ClickByCardShouldOpenRequiredPage(Card card, string page)
         {
-            WebDriverWait wait = new(_driver, TimeSpan.FromSeconds(10));
             _driver.Navigate().GoToUrl(Constant.TargetSite);
 
-            //var cardElement = MainPageObject.GetCardElement(card, _driver);
-            var cardElement = wait.Until((driver) => MainPageObject.GetCardElement(card, driver));
-
-            cardElement.Click();
+            var cardElement = MainPageObject.GetCardElement(card, _driver, _wait);
+            cardElement.TryClick(_driver);
 
             var currentUrl = _driver.Url;
-            Assert.AreEqual(Constant.TargetSite + cardPath, currentUrl);
+            Assert.AreEqual(Constant.TargetSite + page, currentUrl);
         }
     }
 }
