@@ -1,6 +1,6 @@
 ﻿namespace Demoqa.PageObjects
 {
-    public class BaseObject
+    public class BasePageObject
     {
     }
 }

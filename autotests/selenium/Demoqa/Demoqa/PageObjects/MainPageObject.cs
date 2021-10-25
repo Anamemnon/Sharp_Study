@@ -4,7 +4,7 @@ using SeleniumExtras.WaitHelpers;
 
 namespace Demoqa.PageObjects
 {
-    public class MainPageObject : BaseObject
+    public class MainPageObject : BasePageObject
     {
 
         public static IWebElement GetCardElement(Card card, IWebDriver driver, WebDriverWait wait)
