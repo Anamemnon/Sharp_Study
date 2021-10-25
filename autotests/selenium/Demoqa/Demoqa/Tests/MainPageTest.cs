@@ -6,6 +6,12 @@ namespace Demoqa.Tests
 {
     public class MainPageTest : Base
     {
+        [SetUp]
+        public void SetUp()
+        {
+            _driver.Open(Constant.TargetSite);
+        }
+
         [Test]
         [TestCase(Card.ELEMENTS, "elements")]
         [TestCase(Card.FORMS, "forms")]
@@ -15,8 +21,6 @@ namespace Demoqa.Tests
         [TestCase(Card.BOOK_STORE_APPLICATION, "books")]
         public void Test_ClickByCardShouldOpenRequiredPage(Card card, string page)
         {
-            _driver.Navigate().GoToUrl(Constant.TargetSite);
-
             var cardElement = MainPageObject.GetCardElement(card, _driver, _wait);
             cardElement.TryClick(_driver);
 
