@@ -1,6 +1,7 @@
 using Demoqa.Extensions;
 using Demoqa.PageObjects;
 using NUnit.Framework;
+using System.Threading.Tasks;
 
 namespace Demoqa.Tests
 {
@@ -19,10 +20,10 @@ namespace Demoqa.Tests
         [TestCase(Card.WIDGETS, "widgets")]
         [TestCase(Card.INTERACTIONS, "interaction")]
         [TestCase(Card.BOOK_STORE_APPLICATION, "books")]
-        public void Test_ClickByCardShouldOpenRequiredPage(Card card, string page)
+        public async Task Test_ClickByCardShouldOpenRequiredPageAsync(Card card, string page)
         {
-            var cardElement = MainPageObject.GetCardElement(card, _driver, _wait);
-            cardElement.TryClick(_driver);
+            var cardElement = await MainPageObject.GetCardElementAsync(card, _driver, _wait);
+            await cardElement.TryClickAsync(_driver);
 
             var currentUrl = _driver.Url;
             Assert.AreEqual(Constant.TargetSite + page, currentUrl);

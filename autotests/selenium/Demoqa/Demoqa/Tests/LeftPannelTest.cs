@@ -1,7 +1,6 @@
 ﻿using Demoqa.Extensions;
 using Demoqa.PageObjects;
 using NUnit.Framework;
-using System.Threading;
 
 namespace Demoqa.Tests
 {
@@ -14,13 +13,13 @@ namespace Demoqa.Tests
         [TestCase(Card.WIDGETS, "widgets")]
         [TestCase(Card.INTERACTIONS, "interaction")]
         [TestCase(Card.BOOK_STORE_APPLICATION, "books")]
-        public void Test_ClickByLeftPannelElementShouldOpenOrCloseListOfElements(Card card, string page)
+        public async void Test_ClickByLeftPannelElementShouldOpenOrCloseListOfElements(Card card, string page)
         {
-            _driver.Open($"{Constant.TargetSite}{page}");
-            LeftPannel.Close(card, _driver, _wait);
-            LeftPannel.Open(card, _driver, _wait);
+            await _driver.OpenAsync($"{Constant.TargetSite}{page}");
+            LeftPannelObject.Close(card, _driver, _wait);
+            LeftPannelObject.Open(card, _driver, _wait);
 
-            Thread.Sleep(1000);
+            //LeftPannelObject.ShouldContainsAllItems(card);
         }
     }
 }

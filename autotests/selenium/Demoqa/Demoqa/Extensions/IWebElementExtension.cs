@@ -1,22 +1,26 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
+using System.Threading.Tasks;
 
 namespace Demoqa.Extensions
 {
     public static class IWebElementExtension
     {
-        public static void TryClick(this IWebElement webElement, IWebDriver driver)
+        async public static Task TryClickAsync(this IWebElement webElement, IWebDriver driver)
         {
             try
             {
-                webElement.Click();
+                await Task.Run(() => webElement.Click());
             }
-            catch (OpenQA.Selenium.ElementClickInterceptedException)
+            catch (ElementClickInterceptedException)
             {
-                Actions actions = new Actions(driver);
-                actions.MoveToElement(webElement);
-                actions.Perform();
-                webElement.Click();
+                await Task.Run(() =>
+                {
+                    Actions actions = new(driver);
+                    actions.MoveToElement(webElement);
+                    actions.Perform();
+                    webElement.Click();
+                });
             }
         }
     }

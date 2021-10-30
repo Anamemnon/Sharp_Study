@@ -1,4 +1,5 @@
 ﻿using Demoqa.Extensions;
+using Demoqa.PageObjects.LeftPannel;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
@@ -6,7 +7,7 @@ using System;
 
 namespace Demoqa.PageObjects
 {
-    public class LeftPannel : BasePageObject
+    public class LeftPannelObject : BasePageObject
     {
         public static void Open(Card card, IWebDriver driver, WebDriverWait wait)
         {
@@ -23,12 +24,17 @@ namespace Demoqa.PageObjects
             };
             var element = driver.FindElement(By.CssSelector($".left-pannel .element-group:nth-child({child})"));
             element = wait.Until(condition: ExpectedConditions.ElementToBeClickable(element));
-            element.TryClick(driver);
+            _ = element.TryClickAsync(driver);
         }
 
         public static void Close(Card card, IWebDriver driver, WebDriverWait wait)
         {
             Open(card, driver, wait);
+        }
+
+        public static void ShouldContainsAllItems(ILeftPannelVerifier element)
+        {
+            element.ShouldContainsAllItems();
         }
     }
 }
