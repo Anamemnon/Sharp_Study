@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using RazorPagesMovie.Data;
 using RazorPagesMovie.Models;
 
 namespace RazorPagesMovie.Pages.Movies
 {
     public class CreateModel : PageModel
     {
+#pragma warning disable CS8618
+#pragma warning disable CS8602
+
         private readonly RazorPagesMovie.Data.RazorPagesMovieContext _context;
 
         public CreateModel(RazorPagesMovie.Data.RazorPagesMovieContext context)
@@ -41,4 +38,6 @@ namespace RazorPagesMovie.Pages.Movies
             return RedirectToPage("./Index");
         }
     }
+#pragma warning restore CS8618
+#pragma warning restore CS8602
 }
