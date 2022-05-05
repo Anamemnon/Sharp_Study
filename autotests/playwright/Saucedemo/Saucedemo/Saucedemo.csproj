@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
 
     <IsPackable>false</IsPackable>
+	<PlaywrightPlatform>win</PlaywrightPlatform>
   </PropertyGroup>
 
   <ItemGroup>
