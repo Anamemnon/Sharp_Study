@@ -20,6 +20,9 @@ namespace MatchGame
     /// </summary>
     public partial class MainWindow : Window
     {
+        private bool findingMatch = false;
+        private TextBlock lastTextBlockClicked;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -41,7 +44,7 @@ namespace MatchGame
                 "🐷", "🐷",
             };
 
-            Random random = new Random();
+            Random random = new();
             foreach (TextBlock textBlock in mainGrid.Children.OfType<TextBlock>())
             {
                 int index = random.Next(animalEmoji.Count);
@@ -50,6 +53,26 @@ namespace MatchGame
                 animalEmoji.RemoveAt(index);
             }
 
+        }
+
+        private void TextBlock_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is not TextBlock textBlock) return;
+
+            if (findingMatch is false)
+            {
+                textBlock.Visibility = Visibility.Hidden;
+                lastTextBlockClicked = textBlock;
+                findingMatch = true;
+            } else if (textBlock.Text == lastTextBlockClicked.Text)
+            {
+                textBlock.Visibility = Visibility.Hidden;
+                findingMatch = false;
+            } else
+            {
+                lastTextBlockClicked.Visibility = Visibility.Visible;
+                findingMatch = false;
+            }
         }
     }
 }
